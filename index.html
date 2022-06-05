@@ -38,6 +38,8 @@
     let tools = document.getElementById("tools");
     let searchIcon = document.getElementById("search-icon");
     let searchForm = document.getElementById("search-form");
+    let startInput = document.getElementById("start");
+    let endInput = document.getElementById("end");
 
     searchIcon.addEventListener("click", () => {
       tools.style.maxHeight = "600px";
@@ -47,11 +49,14 @@
 
     searchForm.addEventListener("submit", (event) => {
       event.preventDefault();
+      if (startInput.value.trim() == "" || endInput.value.trim() == "") {
+        alert("Missing address field");
+        return false;
+      }
       calcRoute();
       searchIcon.style.display = "block";
       searchForm.style.display = "none";
       tools.style.maxHeight = "60px";
-
     });
 
   </script>
@@ -272,7 +277,7 @@
 
         computeTotalDistance(response);
       } else {
-        // alert("directions response " + status);
+        alert("Search failed. \n\n Try to be more specific.");
       }
     });
   }
